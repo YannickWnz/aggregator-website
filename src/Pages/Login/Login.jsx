@@ -12,7 +12,7 @@ export const Login = () => {
         email: '',
         password: ''
     })
-
+ 
     const handleDetailsChange = (e) => {
 
         const {name, value} = e.target
