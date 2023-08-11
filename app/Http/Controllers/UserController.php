@@ -14,10 +14,17 @@ class UserController extends Controller
     //
     function signupUser(Request $req) {
 
+        // check if email already exists
+        $existingUser = User::where('email', $req->input('email'))->first();
+        if ($existingUser) {
+            return response()->json(['error' => 'Email already exists'], 400);
+        }
+
         $user = new User();
         $user->name = $req->input('name');
         $user->email = $req->input('email');
         $user->password = Hash::make($req->input('password'));
+
         $user->save();
 
         $token = sha1(time());
